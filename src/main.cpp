@@ -1,18 +1,27 @@
 #include <Arduino.h>
 #include <Adafruit_SCD30.h>
+#include "scan.h"
 
 Adafruit_SCD30 scd30;
 // put function declarations here:
 
 void setup()
 {
+  // setupI2C();
+  // loopI2C();
+
   Serial.begin(115200);
+
   while (!Serial)
-    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+    delay(10); // will pause until serial console opens, use the RESET button to start monitoring
 
   Serial.println("Adafruit SCD30 Sensor adjustment test!");
+  Serial.println("Attempting to find SCD30 chip (CO2-Sensor)");
 
-  // Try to initialize!
+  // TwoWire i2cCo2Sensor = TwoWire(0);
+  // i2cCo2Sensor.begin(21, 22);
+
+  // if (!scd30.begin(SCD30_I2CADDR_DEFAULT, &i2cCo2Sensor))
   if (!scd30.begin())
   {
     Serial.println("Failed to find SCD30 chip");
