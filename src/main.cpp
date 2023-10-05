@@ -5,12 +5,11 @@
 
 void setup()
 {
-
   Serial.begin(115200);
-  setupSDC30();
-
   while (!Serial)
     delay(10); // will pause until serial console opens, use the RESET button to start monitoring
+
+  setupSDC30();
 }
 
 void loop()
