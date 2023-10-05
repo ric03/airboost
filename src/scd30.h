@@ -5,6 +5,13 @@
 
 Adafruit_SCD30 scd30;
 
+struct Adafruit_SCD30_Data
+{
+    float temperature;
+    float CO2;
+    float relative_humidity;
+} data;
+
 void setupSDC30()
 {
 
@@ -109,28 +116,42 @@ void setupSDC30()
     Serial.println("\n\n");
 }
 
-void readScd30Data()
+Adafruit_SCD30_Data *readScd30Data()
 {
     if (scd30.dataReady())
     {
-
         if (!scd30.read())
         {
-            Serial.println("Error reading sensor data");
-            return;
+            return nullptr;
         }
 
-        Serial.print("Temperature: ");
-        Serial.print(scd30.temperature);
-        Serial.println(" degrees C");
+        data.temperature = scd30.temperature;
+        data.CO2 = scd30.CO2;
+        data.relative_humidity = scd30.relative_humidity;
 
-        Serial.print("Relative Humidity: ");
-        Serial.print(scd30.relative_humidity);
-        Serial.println(" %");
-
-        Serial.print("CO2: ");
-        Serial.print(scd30.CO2, 3);
-        Serial.println(" ppm");
-        Serial.println("");
+        return &data;
     }
+    return nullptr;
+}
+
+void printScd30Data(Adafruit_SCD30_Data *data)
+{
+    if (!data)
+    {
+        Serial.println("Error reading sensor data");
+        return;
+    }
+
+    Serial.print("Temperature: ");
+    Serial.print(data->temperature);
+    Serial.println(" degrees C");
+
+    Serial.print("Relative Humidity: ");
+    Serial.print(data->relative_humidity);
+    Serial.println(" %");
+
+    Serial.print("CO2: ");
+    Serial.print(data->CO2, 3);
+    Serial.println(" ppm");
+    Serial.println("");
 }

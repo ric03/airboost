@@ -14,7 +14,12 @@ void setup()
 
 void loop()
 {
-  readScd30Data();
+  Adafruit_SCD30_Data *data = readScd30Data();
+  if (data)
+  {
+    printScd30Data(data);
+  }
+
   delay(100);
 }
 
