@@ -9,6 +9,8 @@
 #define OLED_RESET -1    // Reset pin # (or -1 if sharing Arduino reset pin)
 #define I2C_ADDRESS 0x3C
 
+#define DEGREE_SYMBOL char(248)
+
 namespace display
 {
     void println(const String &s);
@@ -36,9 +38,9 @@ namespace display
     {
         display::display.clearDisplay();
         display::display.setCursor(0, 0); // Start at top-left corner
-        display::display.printf("CO2  %4.0f ppm\n", data->CO2);
-        display::display.printf("Temp %2.1f %cC\n", data->temperature, char(248));
-        display::display.printf("RH   %2.1f %%\n", data->relative_humidity);
+        display::display.printf("CO2 %4.0f ppm\n", data->CO2);
+        display::display.printf("T   %2.1f %cC\n", data->temperature, DEGREE_SYMBOL);
+        display::display.printf("RH  %2.1f %%\n", data->relative_humidity);
         display::display.display();
     }
 
