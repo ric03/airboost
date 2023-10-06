@@ -38,7 +38,7 @@ namespace display
     {
 
         /**
-         * Add some additional lineSpacing to improve the visual output
+         * Add additional lineSpacing to improve the visual output
          *
          *    16 px text
          *     8 px spacing
