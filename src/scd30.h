@@ -147,7 +147,7 @@ namespace scd30
 
         Serial.print("Temperature: ");
         Serial.print(data->temperature);
-        Serial.println(" degrees C");
+        Serial.println(" °C");
 
         Serial.print("Relative Humidity: ");
         Serial.print(data->relative_humidity);
