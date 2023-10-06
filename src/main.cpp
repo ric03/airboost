@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include "scd30.h"
 
-// put function declarations here:
+#define SCD30_ENABLED true
+#define LOOP_DEPLAY 250
 
 void setup()
 {
@@ -9,18 +10,20 @@ void setup()
   while (!Serial)
     delay(10); // will pause until serial console opens, use the RESET button to start monitoring
 
-  setupSDC30();
+#if SCD30_ENABLED == true
+  scd30::setup();
+#endif
 }
 
 void loop()
 {
-  Adafruit_SCD30_Data *data = readScd30Data();
+#if SCD30_ENABLED == true
+  scd30::Data *data = scd30::readData();
   if (data)
   {
-    printScd30Data(data);
+    scd30::printSerial(data);
   }
+#endif
 
-  delay(100);
+  delay(LOOP_DEPLAY);
 }
-
-// put function definitions here:
