@@ -26,17 +26,20 @@ namespace display
 
         display.setTextColor(SH110X_WHITE); // Draw white text (the default is black), because the display is black
         display.setTextSize(1);             // Normal 1:1 pixel scale
+        display.cp437(true);                // Enable correct CP437 character values, to print degree symbol (°)
 
         display.clearDisplay();
         display.display();
     }
 
-    void println(const String &str)
+    void printSCD30Data(scd30::Data *data)
     {
-        display.clearDisplay();
-        display.setCursor(0, 0); // Start at top-left corner
-        display.println(str);
-        display.display();
+        display::display.clearDisplay();
+        display::display.setCursor(0, 0); // Start at top-left corner
+        display::display.printf("CO2  %4.0f ppm\n", data->CO2);
+        display::display.printf("Temp %2.1f %cC\n", data->temperature, char(248));
+        display::display.printf("RH   %2.1f %%\n", data->relative_humidity);
+        display::display.display();
     }
 
 } // namespace display

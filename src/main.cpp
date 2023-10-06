@@ -20,6 +20,7 @@ void loop()
   if (data)
   {
     scd30::printSerial(data);
+    display::printSCD30Data(data);
   }
 
   delay(LOOP_DEPLAY);
