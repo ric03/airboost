@@ -3,17 +3,17 @@
 #include <Arduino.h>
 #include <Adafruit_SCD30.h>
 
-namespace scd30
+namespace sensor_scd30
 {
 
     Adafruit_SCD30 scd30;
 
-    struct Data
+    struct SensorData
     {
         float temperature;
         float CO2;
         float relative_humidity;
-    } data;
+    } sensorData;
 
     void setup()
     {
@@ -119,7 +119,7 @@ namespace scd30
         Serial.println("\n\n");
     }
 
-    Data *readData()
+    SensorData *readData()
     {
         if (scd30.dataReady())
         {
@@ -128,16 +128,16 @@ namespace scd30
                 return nullptr;
             }
 
-            data.temperature = scd30.temperature;
-            data.CO2 = scd30.CO2;
-            data.relative_humidity = scd30.relative_humidity;
+            sensorData.temperature = scd30.temperature;
+            sensorData.CO2 = scd30.CO2;
+            sensorData.relative_humidity = scd30.relative_humidity;
 
-            return &data;
+            return &sensorData;
         }
         return nullptr;
     }
 
-    void printSerial(Data *data)
+    void printSerial(SensorData *data)
     {
         if (!data)
         {

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "scd30.h"
+#include "sensor_scd30.h"
 #include "oled_display_sh1106.h"
 #include "display_service.h"
 
@@ -11,16 +11,16 @@ void setup()
   while (!Serial)
     delay(10); // will pause until serial console opens, use the RESET button to start monitoring
 
-  scd30::setup();
+  sensor_scd30::setup();
   display::setup();
 }
 
 void loop()
 {
-  scd30::Data *data = scd30::readData();
+  sensor_scd30::SensorData *data = sensor_scd30::readData();
   if (data)
   {
-    scd30::printSerial(data);
+    sensor_scd30::printSerial(data);
     display_service::displaySCD30Data(data);
   }
 

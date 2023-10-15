@@ -1,5 +1,8 @@
 #pragma once
 
+#include "oled_display_sh1106.h"
+#include "sensor_scd30.h"
+
 namespace display_service
 {
 
@@ -13,7 +16,7 @@ namespace display_service
      *
      * Diplay Size: 64x128px (wxh)
      */
-    void displaySCD30Data(scd30::Data *data)
+    void displaySCD30Data(sensor_scd30::SensorData *data)
     {
 
         /**
