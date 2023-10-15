@@ -11,8 +11,6 @@
 
 namespace display
 {
-    void println(const String &s);
-
     Adafruit_SH1106G display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
     void setup()
