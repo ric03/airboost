@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "scd30.h"
 #include "oled_display_sh1106.h"
+#include "display_service.h"
 
 #define LOOP_DEPLAY 250
 
@@ -20,7 +21,7 @@ void loop()
   if (data)
   {
     scd30::printSerial(data);
-    display::printSCD30Data(data);
+    display_service::displaySCD30Data(data);
   }
 
   delay(LOOP_DEPLAY);
