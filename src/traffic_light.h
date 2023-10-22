@@ -5,6 +5,9 @@
 namespace traffic_light
 {
 
+    /**
+     * The assigned values are the physical pin numbers of the corresponding led.
+     */
     enum Light
     {
         GREEN = 25,
@@ -26,36 +29,48 @@ namespace traffic_light
     {
         if (light == activeLigth)
         {
-            return; // the light is already set
+            // the light is already active
+            return;
         }
 
-        // switch off active light
         if (activeLigth != OFF)
         {
+            // switch off active light
             digitalWrite(activeLigth, LOW);
         }
 
-        // turn on new light
-        switch (light)
+        if (light != OFF)
         {
-        case GREEN:
-            digitalWrite(GREEN, HIGH);
-            break;
-
-        case YELLOW:
-            digitalWrite(YELLOW, HIGH);
-            break;
-
-        case RED:
-            digitalWrite(RED, HIGH);
-            break;
-
-        default:
-            break;
+            // switch on new light
+            digitalWrite(light, HIGH);
         }
 
         // update active light
         activeLigth = light;
+    }
+
+    void printSerial()
+    {
+        String light = "OFF";
+        switch (activeLigth)
+        {
+        case GREEN:
+            light = "GREEN";
+            break;
+
+        case YELLOW:
+            light = "YELLOW";
+            break;
+
+        case RED:
+            light = "RED";
+            break;
+
+        default:
+            light = "OFF";
+            break;
+        }
+        Serial.printf("Active Light: %s\n", light.c_str());
     }
 
     // for debug purposes
