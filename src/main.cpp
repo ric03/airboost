@@ -4,6 +4,7 @@
 #include "oled_display_sh1106.h"
 #include "display_service.h"
 #include "traffic_light.h"
+#include "button.h"
 
 #define LOOP_DEPLAY 250
 
@@ -16,6 +17,7 @@ void setup()
   sensor_scd30::setup();
   display::setup();
   traffic_light::setup();
+  button::setup();
 }
 
 void loop()
