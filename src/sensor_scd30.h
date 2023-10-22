@@ -156,7 +156,6 @@ namespace sensor_scd30
         Serial.print("CO2: ");
         Serial.print(data->CO2, 3);
         Serial.println(" ppm");
-        Serial.println("");
     }
 
 }

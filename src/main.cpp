@@ -4,6 +4,7 @@
 #include "oled_display_sh1106.h"
 #include "display_service.h"
 #include "traffic_light.h"
+#include "traffic_light_service.h"
 #include "button.h"
 
 #define LOOP_DEPLAY 250
@@ -25,11 +26,13 @@ void loop()
   sensor_scd30::SensorData *data = sensor_scd30::readData();
   if (data)
   {
-    sensor_scd30::printSerial(data);
     display_service::displaySCD30Data(data);
-  }
+    traffic_light_service::updateLight(data);
 
-  traffic_light::cycleLights();
+    sensor_scd30::printSerial(data);
+    traffic_light::printSerial();
+    Serial.println();
+  }
 
   delay(LOOP_DEPLAY);
 }
