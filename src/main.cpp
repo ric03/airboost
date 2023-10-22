@@ -1,7 +1,9 @@
 #include <Arduino.h>
+
 #include "sensor_scd30.h"
 #include "oled_display_sh1106.h"
 #include "display_service.h"
+#include "traffic_light.h"
 
 #define LOOP_DEPLAY 250
 
@@ -13,6 +15,7 @@ void setup()
 
   sensor_scd30::setup();
   display::setup();
+  traffic_light::setup();
 }
 
 void loop()
@@ -23,6 +26,8 @@ void loop()
     sensor_scd30::printSerial(data);
     display_service::displaySCD30Data(data);
   }
+
+  traffic_light::cycleLights();
 
   delay(LOOP_DEPLAY);
 }
