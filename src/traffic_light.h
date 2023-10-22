@@ -58,7 +58,7 @@ namespace traffic_light
         activeLigth = light;
     }
 
-    // for initial debug purposes
+    // for debug purposes
     void cycleLights()
     {
         static unsigned long lastLightSwitch = 0;
