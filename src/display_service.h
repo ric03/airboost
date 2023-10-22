@@ -16,7 +16,7 @@ namespace display_service
      *
      * Diplay Size: 64x128px (wxh)
      */
-    void displaySCD30Data(sensor_scd30::SensorData *data)
+    void displaySCD30Data(const sensor_scd30::SensorData *data)
     {
 
         /**
@@ -34,9 +34,9 @@ namespace display_service
          * Textsize 1 => 6x8
          * Textsize 2 => 12x16
          */
-        const int lineHeight = 16;
-        const int lineSpacing = 8;
-        int textY = 0; // keep track of vertical cursor position, to support lineSpacing
+        const uint16_t lineHeight = 16;
+        const uint16_t lineSpacing = 8;
+        uint16_t textY = 0; // keep track of vertical cursor position, to support lineSpacing
 
         display::display.clearDisplay();
         display::display.setCursor(0, 0); // Start at top-left corner
