@@ -41,3 +41,18 @@ Adafruit SCD30 based on the Sensirion SCD30 (NDIR C02 Sensor)
 - https://cdn.shopify.com/s/files/1/1509/1638/files/ESP-32_NodeMCU_Developmentboard_Pinout.pdf?v=1609851295 AZ-Delivery
 - https://learn.adafruit.com/adafruit-scd30
 - https://lastminuteengineers.com/handling-esp32-gpio-interrupts-tutorial/
+
+
+# SonarLint
+
+Linter to detect & fix coding issues locally
+
+The plugin requires `compileCommands` in order to scan the code.
+
+Create the configuration with PlatformIO
+
+with a CLI command
+
+    platformio run --target compiledb --environment az-delivery-devkit-v4
+
+or through the PIO-UI. (PlatformIO > Advanced > Compilation Database)
