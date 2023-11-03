@@ -6,6 +6,7 @@
 #include "traffic_light.h"
 #include "traffic_light_service.h"
 #include "button.h"
+#include "speaker.h"
 
 #define LOOP_DEPLAY 250
 
@@ -19,6 +20,8 @@ void setup()
   display::setup();
   traffic_light::setup();
   button::setup();
+
+  speaker::playTone();
 }
 
 void loop()
