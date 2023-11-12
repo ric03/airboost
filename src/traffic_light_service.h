@@ -8,15 +8,6 @@
 namespace traffic_light_service
 {
 
-    traffic_light::Light getMatchingLight(float co2);
-
-    void updateLight(const sensor_scd30::SensorData *data)
-    {
-        using namespace traffic_light;
-        Light light = getMatchingLight(data->CO2);
-        changeLight(light);
-    }
-
     traffic_light::Light getMatchingLight(float co2)
     {
         using namespace traffic_light;
@@ -32,5 +23,11 @@ namespace traffic_light_service
         {
             return RED;
         }
+    }
+
+    void updateLight(const sensor_scd30::SensorData *data)
+    {
+        traffic_light::Light newlight = getMatchingLight(data->CO2);
+        traffic_light::changeLight(newlight);
     }
 }
