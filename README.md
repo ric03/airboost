@@ -36,6 +36,11 @@ Adafruit SCD30 based on the Sensirion SCD30 (NDIR C02 Sensor)
 | I2C-Address      | 0x3C         |
 
 
+### Passive Buzzer
+
+The ESP-32 libraries don't have a tone() function (Arduino tone library).
+We have to use PWM to control the output.
+
 # Useful resources
 
 - https://cdn.shopify.com/s/files/1/1509/1638/files/ESP-32_NodeMCU_Developmentboard_Pinout.pdf?v=1609851295 AZ-Delivery
