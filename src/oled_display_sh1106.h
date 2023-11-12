@@ -14,6 +14,9 @@ namespace display
 {
     Adafruit_SH1106G display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+    const uint16_t WHITE = SH110X_WHITE;
+    const uint16_t BLACK = SH110X_BLACK;
+
     void setup()
     {
         if (!display.begin(I2C_ADDRESS, true))
@@ -23,12 +26,23 @@ namespace display
                 ; // Don't proceed, loop forever
         }
 
-        display.setTextColor(SH110X_WHITE); // Draw white text (the default is black), because the display is black
-        display.setTextSize(1);             // Normal 1:1 pixel scale
-        display.cp437(true);                // Enable correct CP437 character values, to print degree symbol (°)
+        setNormalTextColor();
+        display.setTextSize(1); // Normal 1:1 pixel scale
+        display.cp437(true);    // Enable correct CP437 character values, to print degree symbol (°)
 
         display.clearDisplay();
         display.display();
+    }
+
+    void setNormalTextColor()
+    {
+        // Draw white text (the default is black), because the display is black
+        display.setTextColor(WHITE);
+    }
+
+    void invertTextColor()
+    {
+        display.setTextColor(BLACK, WHITE);
     }
 
 } // namespace display
