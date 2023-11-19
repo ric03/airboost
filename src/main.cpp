@@ -26,25 +26,24 @@ void setup()
 
 void loop()
 {
-  sensor_scd30::SensorData *data = sensor_scd30::readData();
-  if (data)
+  Serial.println();
+
+  sensor_scd30::updateDataWithInterval();
+  sensor_scd30::SensorData *data = &sensor_scd30::sensorData;
+  sensor_scd30::printSerial(data);
+
+  // traffic light
+  auto light = traffic_light_service::getMatchingLight(data->CO2);
+  traffic_light::changeLight(light);
+  traffic_light::printSerial();
+
+  // buzzer
+  if (data->CO2 > 1100)
   {
-    // traffic light
-    auto light = traffic_light_service::getMatchingLight(data->CO2);
-    traffic_light::changeLight(light);
-    traffic_light::printSerial();
-
-    // buzzer
-    if (data->CO2 > 1100)
-    {
-      buzzer::playWarning();
-    }
-
-    sensor_scd30::printSerial(data);
-    Serial.println();
-
-    view::viewService.render(data);
+    buzzer::playWarning();
   }
+
+  view::viewService.render(data);
 
   delay(LOOP_DEPLAY);
 }

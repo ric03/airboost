@@ -10,9 +10,9 @@ namespace sensor_scd30
 
     struct SensorData
     {
-        float temperature;
-        float CO2;
-        float relative_humidity;
+        float temperature = 0;
+        float CO2 = 0;
+        float relative_humidity = 0;
     } sensorData;
 
     void setup()
@@ -119,22 +119,31 @@ namespace sensor_scd30
         Serial.println("\n\n");
     }
 
-    SensorData *readData()
+    /**
+     * Reading the data takes some time
+     */
+    void updateData()
     {
-        if (scd30.dataReady())
+        if (scd30.dataReady() && scd30.read())
         {
-            if (!scd30.read())
-            {
-                return nullptr;
-            }
-
             sensorData.temperature = scd30.temperature;
             sensorData.CO2 = scd30.CO2;
             sensorData.relative_humidity = scd30.relative_humidity;
-
-            return &sensorData;
         }
-        return nullptr;
+    }
+
+    void updateDataWithInterval()
+    {
+        // variable to keep track of the timing of recent update
+        static unsigned long last_update_time = 0;
+        const unsigned long INTERVAL_MS = 2500;
+
+        auto now = millis();
+        if (now - last_update_time > INTERVAL_MS)
+        {
+            last_update_time = now;
+            updateData();
+        }
     }
 
     void printSerial(SensorData *data)
