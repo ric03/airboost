@@ -17,6 +17,17 @@ namespace display
     const uint16_t WHITE = SH110X_WHITE;
     const uint16_t BLACK = SH110X_BLACK;
 
+    void setNormalTextColor()
+    {
+        // Draw white text (the default is black), because the display is black
+        display.setTextColor(WHITE);
+    }
+
+    void invertTextColor()
+    {
+        display.setTextColor(BLACK, WHITE);
+    }
+
     void setup()
     {
         if (!display.begin(I2C_ADDRESS, true))
@@ -32,17 +43,6 @@ namespace display
 
         display.clearDisplay();
         display.display();
-    }
-
-    void setNormalTextColor()
-    {
-        // Draw white text (the default is black), because the display is black
-        display.setTextColor(WHITE);
-    }
-
-    void invertTextColor()
-    {
-        display.setTextColor(BLACK, WHITE);
     }
 
 } // namespace display
