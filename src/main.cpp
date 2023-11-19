@@ -21,9 +21,7 @@ void setup()
   display::setup();
   traffic_light::setup();
   button::setup();
-
   buzzer::setup();
-  buzzer::playTone();
 }
 
 void loop()
@@ -33,6 +31,11 @@ void loop()
   {
     traffic_light_service::updateLight(data);
     traffic_light::printSerial();
+    // buzzer
+    if (data->CO2 > 1100)
+    {
+      buzzer::playWarning();
+    }
 
     sensor_scd30::printSerial(data);
     Serial.println();
