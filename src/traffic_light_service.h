@@ -24,10 +24,4 @@ namespace traffic_light_service
             return RED;
         }
     }
-
-    void updateLight(const sensor_scd30::SensorData *data)
-    {
-        traffic_light::Light newlight = getMatchingLight(data->CO2);
-        traffic_light::changeLight(newlight);
-    }
 }

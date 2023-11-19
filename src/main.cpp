@@ -29,8 +29,11 @@ void loop()
   sensor_scd30::SensorData *data = sensor_scd30::readData();
   if (data)
   {
-    traffic_light_service::updateLight(data);
+    // traffic light
+    auto light = traffic_light_service::getMatchingLight(data->CO2);
+    traffic_light::changeLight(light);
     traffic_light::printSerial();
+
     // buzzer
     if (data->CO2 > 1100)
     {
