@@ -79,21 +79,21 @@ namespace button
         }
     }
 
+    /**
+     * Arduinos have an internal pullup
+     */
+    void setupButton(uint8_t pin, void (*intRoutine)())
+    {
+        pinMode(pin, INPUT_PULLUP);
+        attachInterrupt(pin, intRoutine, FALLING);
+    }
+
     void setup()
     {
-        pinMode(BUTTON_LEFT_PIN, INPUT_PULLUP);
-        attachInterrupt(BUTTON_LEFT_PIN, isrLeft, FALLING);
-
-        pinMode(BUTTON_UP_PIN, INPUT_PULLUP);
-        attachInterrupt(BUTTON_UP_PIN, isrUp, FALLING);
-
-        pinMode(BUTTON_RIGHT_PIN, INPUT_PULLUP);
-        attachInterrupt(BUTTON_RIGHT_PIN, isrRight, FALLING);
-
-        pinMode(BUTTON_DOWN_PIN, INPUT_PULLUP);
-        attachInterrupt(BUTTON_DOWN_PIN, isrDown, FALLING);
-
-        pinMode(BUTTON_OK_PIN, INPUT_PULLUP);
-        attachInterrupt(BUTTON_OK_PIN, isrOk, FALLING);
+        setupButton(BUTTON_LEFT_PIN, isrLeft);
+        setupButton(BUTTON_UP_PIN, isrUp);
+        setupButton(BUTTON_RIGHT_PIN, isrRight);
+        setupButton(BUTTON_DOWN_PIN, isrDown);
+        setupButton(BUTTON_OK_PIN, isrOk);
     }
 }
