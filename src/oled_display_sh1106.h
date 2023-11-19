@@ -17,6 +17,11 @@ namespace display
     const uint16_t WHITE = SH110X_WHITE;
     const uint16_t BLACK = SH110X_BLACK;
 
+    /**
+     * Using the Degree symbol requires the display to support the correct "Code Page 437".
+     */
+    const char DEGREE_SYMBOL = char(248);
+
     void setNormalTextColor()
     {
         // Draw white text (the default is black), because the display is black
