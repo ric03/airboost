@@ -7,6 +7,8 @@ namespace buzzer
     const int BUZZER_PIN = 32;
     const int BUZZER_CHANNEL = 0;
 
+    const unsigned long INTERVAL_MS = 10000; // ms
+
     void play(int freq /*Hz*/, int duration_ms)
     {
         ledcWriteTone(BUZZER_CHANNEL, freq);
@@ -31,8 +33,17 @@ namespace buzzer
 
     void playWarning()
     {
-        play(300, 100);
-        toneOff();
+        // variable to keep track of the timing of recent interrupts
+        static unsigned long last_buzzer_time = 0;
+
+        auto now = millis();
+        if (now - last_buzzer_time > INTERVAL_MS)
+        {
+            last_buzzer_time = now;
+
+            play(300, 100);
+            toneOff();
+        }
     }
 
     void setup()
