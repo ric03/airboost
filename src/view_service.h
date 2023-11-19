@@ -1,12 +1,12 @@
 #pragma once
 
-#include "data/data_controller.h"
-#include "co2/co2_controller.h"
-#include "heatindex/heatindex_controller.h"
+#include "views/data/data_controller.h"
+#include "views/co2/co2_controller.h"
+#include "views/heatindex/heatindex_controller.h"
 
 namespace view
 {
-    class ViewController
+    class ViewService
     {
         data::DataController dataController;
         co2::Co2Controller co2Controller;
@@ -15,7 +15,7 @@ namespace view
         AbstractController *activeView;
 
     public:
-        ViewController()
+        ViewService()
         {
             dataController.setViews(&heatIndexController, &co2Controller);
             co2Controller.setViews(&dataController, &heatIndexController);
@@ -54,5 +54,5 @@ namespace view
         }
     };
 
-    ViewController viewController;
+    ViewService viewService;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sensor_scd30.h"
+#include "components/sensor_scd30.h"
 
 class AbstractController
 {

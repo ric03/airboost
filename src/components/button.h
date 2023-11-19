@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "views/view_controller.h"
+#include "view_service.h"
 
 #define BUTTON_LEFT_PIN 19
 #define BUTTON_UP_PIN 18
@@ -23,7 +23,7 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewController.scrollLeft();
+            view::viewService.scrollLeft();
         }
     }
 
@@ -36,7 +36,7 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewController.scrollUp();
+            view::viewService.scrollUp();
         }
     }
 
@@ -49,7 +49,7 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewController.scrollRight();
+            view::viewService.scrollRight();
         }
     }
 
@@ -62,7 +62,7 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewController.scrollDown();
+            view::viewService.scrollDown();
         }
     }
 
@@ -75,7 +75,7 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewController.actionOk();
+            view::viewService.actionOk();
         }
     }
 

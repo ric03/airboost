@@ -1,13 +1,13 @@
 #include <Arduino.h>
 
-#include "sensor_scd30.h"
-#include "oled_display_sh1106.h"
-#include "traffic_light.h"
+#include "components/sensor_scd30.h"
+#include "components/oled_display_sh1106.h"
+#include "components/traffic_light.h"
 #include "traffic_light_service.h"
-#include "button.h"
-#include "buzzer.h"
+#include "components/button.h"
+#include "components/buzzer.h"
 
-#include "views/view_controller.h"
+#include "view_service.h"
 
 #define LOOP_DEPLAY 250
 
@@ -37,7 +37,7 @@ void loop()
     sensor_scd30::printSerial(data);
     Serial.println();
 
-    view::viewController.render(data);
+    view::viewService.render(data);
   }
 
   delay(LOOP_DEPLAY);

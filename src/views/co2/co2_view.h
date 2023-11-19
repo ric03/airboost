@@ -1,7 +1,7 @@
 #pragma once
 
-#include "oled_display_sh1106.h"
-#include "sensor_scd30.h"
+#include "components/oled_display_sh1106.h"
+#include "components/sensor_scd30.h"
 
 namespace co2
 {

@@ -2,8 +2,8 @@
 
 #include <Arduino.h>
 
-#include "sensor_scd30.h"
-#include "traffic_light.h"
+#include "components/sensor_scd30.h"
+#include "components/traffic_light.h"
 
 namespace traffic_light_service
 {
