@@ -12,7 +12,7 @@ namespace button
     const int BUTTON_DOWN_PIN = 16;
     const int BUTTON_OK_PIN = 5;
 
-    const unsigned long DEBOUNCE_TIME = 250; // ms
+    const unsigned long DEBOUNCE_TIME = 100; // ms
 
     void IRAM_ATTR isrLeft()
     {
