@@ -3,16 +3,16 @@
 #include <Arduino.h>
 #include "view_service.h"
 
-#define BUTTON_LEFT_PIN 19
-#define BUTTON_UP_PIN 18
-#define BUTTON_RIGHT_PIN 17
-#define BUTTON_DOWN_PIN 16
-#define BUTTON_OK_PIN 5
-
-#define DEBOUNCE_TIME 250
-
 namespace button
 {
+
+    const int BUTTON_LEFT_PIN = 19;
+    const int BUTTON_UP_PIN = 18;
+    const int BUTTON_RIGHT_PIN = 17;
+    const int BUTTON_DOWN_PIN = 16;
+    const int BUTTON_OK_PIN = 5;
+
+    const unsigned long DEBOUNCE_TIME = 250; // ms
 
     void IRAM_ATTR isrLeft()
     {
