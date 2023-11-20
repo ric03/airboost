@@ -50,4 +50,14 @@ namespace display
         display.display();
     }
 
-} // namespace display
+    void printWelcomeMessage()
+    {
+        display.setTextSize(2);
+        display.println("AIRBOOST");
+        display.println();
+        display.println("Air");
+        display.println("Quality");
+        display.display();
+    }
+
+}

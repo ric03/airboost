@@ -23,7 +23,7 @@ namespace buzzer
         play(0, 0);
     }
 
-    void playSetupTone()
+    void playWelcomeTone()
     {
         play(880, 100);
         play(1109, 100);
@@ -50,7 +50,5 @@ namespace buzzer
     {
         ledcSetup(BUZZER_CHANNEL, 500, 15);
         ledcAttachPin(BUZZER_PIN, BUZZER_CHANNEL);
-
-        playSetupTone();
     }
 }

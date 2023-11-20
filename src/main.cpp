@@ -17,11 +17,19 @@ void setup()
   while (!Serial)
     delay(10); // will pause until serial console opens, use the RESET button to start monitoring
 
-  sensor_scd30::setup();
   display::setup();
+  display::printWelcomeMessage();
+
+  sensor_scd30::setup();
+  sensor_scd30::waitUntilDataReady();
+
   traffic_light::setup();
-  button::setup();
+  traffic_light::powerOnSelfTest();
+
   buzzer::setup();
+  buzzer::playWelcomeTone();
+
+  button::setup();
 }
 
 void loop()

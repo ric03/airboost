@@ -119,6 +119,16 @@ namespace sensor_scd30
         Serial.println("\n\n");
     }
 
+    void waitUntilDataReady()
+    {
+        while (!sensor_scd30::scd30.dataReady())
+        {
+            delay(500);
+            Serial.println("waiting for data ready...");
+        }
+        Serial.println("... data is ready");
+    }
+
     /**
      * Reading the data takes some time
      */
@@ -148,12 +158,6 @@ namespace sensor_scd30
 
     void printSerial(SensorData *data)
     {
-        if (!data)
-        {
-            Serial.println("Error reading sensor data");
-            return;
-        }
-
         Serial.print("Temperature: ");
         Serial.print(data->temperature);
         Serial.println(" °C");

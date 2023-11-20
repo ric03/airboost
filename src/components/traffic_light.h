@@ -34,8 +34,6 @@ namespace traffic_light
         pinMode(GREEN, OUTPUT);
         pinMode(YELLOW, OUTPUT);
         pinMode(RED, OUTPUT);
-
-        powerOnSelfTest();
     }
 
     void changeLight(Light light)
