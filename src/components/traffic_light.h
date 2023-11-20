@@ -18,11 +18,24 @@ namespace traffic_light
 
     Light activeLigth = OFF;
 
+    void powerOnSelfTest()
+    {
+        digitalWrite(GREEN, HIGH);
+        digitalWrite(YELLOW, HIGH);
+        digitalWrite(RED, HIGH);
+        delay(500);
+        digitalWrite(GREEN, LOW);
+        digitalWrite(YELLOW, LOW);
+        digitalWrite(RED, LOW);
+    }
+
     void setup()
     {
         pinMode(GREEN, OUTPUT);
         pinMode(YELLOW, OUTPUT);
         pinMode(RED, OUTPUT);
+
+        powerOnSelfTest();
     }
 
     void changeLight(Light light)
@@ -71,43 +84,5 @@ namespace traffic_light
             break;
         }
         Serial.printf("Active Light: %s\n", light.c_str());
-    }
-
-    // for debug purposes
-    void cycleLights()
-    {
-        static unsigned long lastLightSwitch = 0;
-
-        // debounce loop interval
-        if (millis() - lastLightSwitch < 1000)
-        {
-            return;
-        }
-        else
-        {
-            lastLightSwitch = millis();
-        }
-
-        switch (activeLigth)
-        {
-        case GREEN:
-            changeLight(YELLOW);
-            break;
-
-        case YELLOW:
-            changeLight(RED);
-            break;
-
-        case RED:
-            changeLight(OFF);
-            break;
-
-        case OFF:
-            changeLight(GREEN);
-            break;
-
-        default:
-            break;
-        }
     }
 }
