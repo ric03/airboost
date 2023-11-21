@@ -3,7 +3,6 @@
 #include "components/sensor_scd30.h"
 #include "components/oled_display_sh1106.h"
 #include "components/traffic_light.h"
-#include "traffic_light_service.h"
 #include "components/button.h"
 #include "components/buzzer.h"
 
@@ -34,21 +33,32 @@ void setup()
 
 void loop()
 {
-  Serial.println();
+  const auto *data = &sensor_scd30::sensorData;
+  auto now = millis();
 
-  sensor_scd30::updateDataWithInterval();
-  sensor_scd30::SensorData *data = &sensor_scd30::sensorData;
-  sensor_scd30::printSerial(data);
-
-  // traffic light
-  auto light = traffic_light_service::getMatchingLight(data->CO2);
-  traffic_light::changeLight(light);
-  traffic_light::printSerial();
-
-  // buzzer
-  if (data->CO2 > 1100)
+  // variable to keep track of the timing of recent update
+  static unsigned long last_update_time = 0;
+  if (now - last_update_time > 2500 /*ms*/)
   {
-    buzzer::playWarning();
+    last_update_time = now;
+
+    sensor_scd30::updateData();
+    traffic_light::updateLight(data->CO2);
+
+    Serial.println();
+    sensor_scd30::printSerial();
+    traffic_light::printSerial();
+  }
+
+  static unsigned long last_buzzer_time = 0;
+  if (now - last_buzzer_time > 10000 /*ms*/)
+  {
+    last_buzzer_time = now;
+
+    if (data->CO2 > 1100)
+    {
+      buzzer::playWarning();
+    }
   }
 
   view::viewService.render(data);

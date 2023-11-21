@@ -36,14 +36,25 @@ namespace traffic_light
         pinMode(RED, OUTPUT);
     }
 
+    traffic_light::Light getMatchingLight(float co2)
+    {
+        using namespace traffic_light;
+        if (co2 < 800)
+        {
+            return GREEN;
+        }
+        else if (co2 < 1100)
+        {
+            return YELLOW;
+        }
+        else
+        {
+            return RED;
+        }
+    }
+
     void changeLight(Light light)
     {
-        if (light == activeLigth)
-        {
-            // the light is already active
-            return;
-        }
-
         if (activeLigth != OFF)
         {
             // switch off active light
@@ -58,6 +69,15 @@ namespace traffic_light
 
         // update active light
         activeLigth = light;
+    }
+
+    void updateLight(const float co2)
+    {
+        auto light = getMatchingLight(co2);
+        if (light != activeLigth)
+        {
+            changeLight(light);
+        }
     }
 
     void printSerial()

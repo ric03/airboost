@@ -142,21 +142,7 @@ namespace sensor_scd30
         }
     }
 
-    void updateDataWithInterval()
-    {
-        // variable to keep track of the timing of recent update
-        static unsigned long last_update_time = 0;
-        const unsigned long INTERVAL_MS = 2500;
-
-        auto now = millis();
-        if (now - last_update_time > INTERVAL_MS)
-        {
-            last_update_time = now;
-            updateData();
-        }
-    }
-
-    void printSerial(SensorData *data)
+    void printSerial(SensorData *data = &sensorData)
     {
         Serial.print("Temperature: ");
         Serial.print(data->temperature);
@@ -170,5 +156,4 @@ namespace sensor_scd30
         Serial.print(data->CO2, 3);
         Serial.println(" ppm");
     }
-
 }
