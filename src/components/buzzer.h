@@ -4,10 +4,10 @@
 
 namespace buzzer
 {
+    volatile bool isMuted = false;
+
     const int BUZZER_PIN = 32;
     const int BUZZER_CHANNEL = 0;
-
-    const unsigned long INTERVAL_MS = 10000; // ms
 
     void setup()
     {
@@ -15,9 +15,9 @@ namespace buzzer
         ledcAttachPin(BUZZER_PIN, BUZZER_CHANNEL);
     }
 
-    void play(int freq /*Hz*/, int duration_ms)
+    void play(int freq_Hz, int duration_ms)
     {
-        ledcWriteTone(BUZZER_CHANNEL, freq);
+        ledcWriteTone(BUZZER_CHANNEL, freq_Hz);
         if (duration_ms > 0)
         {
             delay(duration_ms);
@@ -39,7 +39,15 @@ namespace buzzer
 
     void playWarning()
     {
+        if (isMuted)
+            return;
+
         play(300, 100);
         toneOff();
+    }
+
+    void toggleMute()
+    {
+        isMuted = !isMuted;
     }
 }

@@ -1,20 +1,19 @@
 #pragma once
 
 #include <Arduino.h>
-#include "view_service.h"
+#include "views/view_service.h"
+#include "buzzer.h"
+#include "interrupt_flags.h"
 
 namespace button
 {
 
-    const int BUTTON_LEFT_PIN = 19;
-    const int BUTTON_UP_PIN = 18;
-    const int BUTTON_RIGHT_PIN = 17;
-    const int BUTTON_DOWN_PIN = 16;
-    const int BUTTON_OK_PIN = 5;
+    const int BUTTON_MUTE_BUZZER = 16;
+    const int BUTTON_NEXT_VIEW = 17;
 
     const unsigned long DEBOUNCE_TIME = 150; // ms
 
-    void IRAM_ATTR isrLeft()
+    void IRAM_ATTR isrMuteBuzzer()
     {
         // variable to keep track of the timing of recent interrupts
         static unsigned long last_button_time = 0;
@@ -23,11 +22,13 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewService.scrollLeft();
+            buzzer::toggleMute();
+            view::viewService.switchToBuzzerMuteView();
+            updateViewImmediatly = true;
         }
     }
 
-    void IRAM_ATTR isrUp()
+    void IRAM_ATTR isrNextView()
     {
         // variable to keep track of the timing of recent interrupts
         static unsigned long last_button_time = 0;
@@ -36,46 +37,8 @@ namespace button
         if (now - last_button_time > DEBOUNCE_TIME)
         {
             last_button_time = now;
-            view::viewService.scrollUp();
-        }
-    }
-
-    void IRAM_ATTR isrRight()
-    {
-        // variable to keep track of the timing of recent interrupts
-        static unsigned long last_button_time = 0;
-
-        auto now = millis();
-        if (now - last_button_time > DEBOUNCE_TIME)
-        {
-            last_button_time = now;
-            view::viewService.scrollRight();
-        }
-    }
-
-    void IRAM_ATTR isrDown()
-    {
-        // variable to keep track of the timing of recent interrupts
-        static unsigned long last_button_time = 0;
-
-        auto now = millis();
-        if (now - last_button_time > DEBOUNCE_TIME)
-        {
-            last_button_time = now;
-            view::viewService.scrollDown();
-        }
-    }
-
-    void IRAM_ATTR isrOk()
-    {
-        // variable to keep track of the timing of recent interrupts
-        static unsigned long last_button_time = 0;
-
-        auto now = millis();
-        if (now - last_button_time > DEBOUNCE_TIME)
-        {
-            last_button_time = now;
-            view::viewService.actionOk();
+            view::viewService.switchToNextView();
+            updateViewImmediatly = true;
         }
     }
 
@@ -90,10 +53,7 @@ namespace button
 
     void setup()
     {
-        setupButton(BUTTON_LEFT_PIN, isrLeft);
-        setupButton(BUTTON_UP_PIN, isrUp);
-        setupButton(BUTTON_RIGHT_PIN, isrRight);
-        setupButton(BUTTON_DOWN_PIN, isrDown);
-        setupButton(BUTTON_OK_PIN, isrOk);
+        setupButton(BUTTON_MUTE_BUZZER, isrMuteBuzzer);
+        setupButton(BUTTON_NEXT_VIEW, isrNextView);
     }
 }

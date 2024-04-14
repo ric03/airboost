@@ -36,14 +36,21 @@ namespace traffic_light
         pinMode(RED, OUTPUT);
     }
 
-    traffic_light::Light getMatchingLight(float co2)
+    /**
+     * threshold    color
+     *    0 -  800  GREEN
+     *  800 - 1100  YELLOW
+     * 1100 - inf   RED
+     *
+     */
+    traffic_light::Light mapCo2ToTrafficLight(float co2_ppm)
     {
         using namespace traffic_light;
-        if (co2 < 800)
+        if (co2_ppm < 800)
         {
             return GREEN;
         }
-        else if (co2 < 1100)
+        else if (co2_ppm < 1100)
         {
             return YELLOW;
         }
@@ -53,7 +60,7 @@ namespace traffic_light
         }
     }
 
-    void changeLight(Light light)
+    void changeLight(const Light newLight)
     {
         if (activeLigth != OFF)
         {
@@ -61,22 +68,22 @@ namespace traffic_light
             digitalWrite(activeLigth, LOW);
         }
 
-        if (light != OFF)
+        if (newLight != OFF)
         {
             // switch on new light
-            digitalWrite(light, HIGH);
+            digitalWrite(newLight, HIGH);
         }
 
         // update active light
-        activeLigth = light;
+        activeLigth = newLight;
     }
 
     void updateLight(const float co2)
     {
-        auto light = getMatchingLight(co2);
-        if (light != activeLigth)
+        auto newLight = mapCo2ToTrafficLight(co2);
+        if (newLight != activeLigth)
         {
-            changeLight(light);
+            changeLight(newLight);
         }
     }
 

@@ -2,18 +2,18 @@
 
 #include "components/oled_display_sh1106.h"
 #include "components/sensor_scd30.h"
+#include "views/abstract_view.h"
 
 namespace co2
 {
 
-    class Co2View
+    class Co2View : public AbstractView
     {
 
-    public:
         /**
          * Display the SCD30 Data (CO2-Sensor) on the display.
          *
-         * Diplay Size: 64x128px (wxh)
+         * Diplay Size: 64x128px (hxw)
          *
          * Textsize 1 => 6x8
          * Textsize 2 => 12x16
@@ -50,6 +50,13 @@ namespace co2
             display::display.setTextSize(1);
 
             display::display.display();
+        }
+
+    public:
+        void render() override
+        {
+            auto data = &sensor_scd30::sensorData;
+            renderData(data);
         }
     };
 }

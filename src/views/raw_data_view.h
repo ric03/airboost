@@ -2,17 +2,17 @@
 
 #include "components/oled_display_sh1106.h"
 #include "components/sensor_scd30.h"
+#include "views/abstract_view.h"
 
 namespace data
 {
 
-    class DataView
+    class RawDataView : public AbstractView
     {
-    public:
         /**
          * Display the SCD30 Data (CO2-Sensor) on the display.
          *
-         * Diplay Size: 64x128px (wxh)
+         * Diplay Size: 64x128px (hxw)
          */
         void renderData(const sensor_scd30::SensorData *data)
         {
@@ -62,6 +62,13 @@ namespace data
             display::display.printf(" %2.1f %%\n", data->relative_humidity);
 
             display::display.display();
+        }
+
+    public:
+        virtual void render() override
+        {
+            auto data = &sensor_scd30::sensorData;
+            renderData(data);
         }
     };
 }
