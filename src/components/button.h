@@ -13,7 +13,11 @@ namespace button
 
     const unsigned long DEBOUNCE_TIME = 150; // ms
 
-    void IRAM_ATTR isrMuteBuzzer()
+    void
+#if defined(ESP32)
+        IRAM_ATTR // Forces code into IRAM instead of flash (required for ESP32)
+#endif
+        isrMuteBuzzer()
     {
         // variable to keep track of the timing of recent interrupts
         static unsigned long last_button_time = 0;
@@ -28,7 +32,11 @@ namespace button
         }
     }
 
-    void IRAM_ATTR isrNextView()
+    void
+#if defined(ESP32)
+        IRAM_ATTR // Forces code into IRAM instead of flash (required for ESP32)
+#endif
+        isrNextView()
     {
         // variable to keep track of the timing of recent interrupts
         static unsigned long last_button_time = 0;
