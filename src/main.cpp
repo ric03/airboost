@@ -2,7 +2,7 @@
 
 #include "components/sensor_scd30.h"
 #include "components/oled_display_sh1106.h"
-#include "components/traffic_light.h"
+#include "components/light_indicator.h"
 #include "components/button.h"
 #include "components/buzzer.h"
 #include "views/view_service.h"
@@ -25,8 +25,8 @@ void setup()
   sensor_scd30::setup();
   sensor_scd30::waitUntilDataReady();
 
-  traffic_light::setup();
-  traffic_light::powerOnSelfTest();
+  light_indicator::setup();
+  light_indicator::powerOnSelfTest();
 
   buzzer::setup();
   buzzer::playWelcomeTone();
@@ -45,11 +45,11 @@ void loop()
     last_update_time = now;
 
     sensor_scd30::updateData();
-    traffic_light::updateLight(sensor_scd30::sensorData.CO2);
+    light_indicator::updateLight(sensor_scd30::sensorData.CO2);
 
     Serial.println();
     sensor_scd30::printSerial();
-    traffic_light::printSerial();
+    light_indicator::printSerial();
 
     updateViewImmediatly = false;
     view::viewService.render();

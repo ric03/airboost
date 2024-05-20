@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-namespace traffic_light
+namespace light_indicator
 {
 
     /**
@@ -10,9 +10,8 @@ namespace traffic_light
      */
     enum Light
     {
-        GREEN = 25,
-        YELLOW = 26,
-        RED = 27,
+        GREEN = D5,
+        RED = D6,
         OFF = -1,
     };
 
@@ -21,38 +20,31 @@ namespace traffic_light
     void powerOnSelfTest()
     {
         digitalWrite(GREEN, HIGH);
-        digitalWrite(YELLOW, HIGH);
         digitalWrite(RED, HIGH);
         delay(500);
         digitalWrite(GREEN, LOW);
-        digitalWrite(YELLOW, LOW);
         digitalWrite(RED, LOW);
     }
 
     void setup()
     {
         pinMode(GREEN, OUTPUT);
-        pinMode(YELLOW, OUTPUT);
         pinMode(RED, OUTPUT);
     }
 
     /**
      * threshold    color
      *    0 -  800  GREEN
-     *  800 - 1100  YELLOW
-     * 1100 - inf   RED
+     *  800 -  inf  RED
      *
      */
-    traffic_light::Light mapCo2ToTrafficLight(float co2_ppm)
+    light_indicator::Light mapCo2ToTrafficLight(float co2_ppm)
     {
-        using namespace traffic_light;
+        using namespace light_indicator;
+
         if (co2_ppm < 800)
         {
             return GREEN;
-        }
-        else if (co2_ppm < 1100)
-        {
-            return YELLOW;
         }
         else
         {
@@ -89,15 +81,11 @@ namespace traffic_light
 
     void printSerial()
     {
-        String light = "OFF";
+        String light = "";
         switch (activeLigth)
         {
         case GREEN:
             light = "GREEN";
-            break;
-
-        case YELLOW:
-            light = "YELLOW";
             break;
 
         case RED:
