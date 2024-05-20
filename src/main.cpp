@@ -13,8 +13,13 @@
 void setup()
 {
   Serial.begin(115200);
+
+#if defined(WAIT_FOR_SERIAL_MONITOR)
+  // Requires active monitoring, use the RESET button to start monitoring
+  // will wait until serial console opens
   while (!Serial)
-    delay(10); // will pause until serial console opens, use the RESET button to start monitoring
+    delay(10);
+#endif
 
   display::setup();
   display::printWelcomeMessage();
