@@ -8,8 +8,8 @@
 namespace button
 {
 
-    const int BUTTON_MUTE_BUZZER = 16;
-    const int BUTTON_NEXT_VIEW = 17;
+    const int BUTTON_MUTE_BUZZER = D2;
+    const int BUTTON_NEXT_VIEW = D3;
 
     const unsigned long DEBOUNCE_TIME = 150; // ms
 

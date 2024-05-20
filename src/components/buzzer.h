@@ -6,7 +6,7 @@ namespace buzzer
 {
     volatile bool isMuted = false;
 
-    const int BUZZER_PIN = 32;
+    const int BUZZER_PIN = D8;
     const int BUZZER_CHANNEL = 0;
 
     void setup()
