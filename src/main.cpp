@@ -8,8 +8,6 @@
 #include "views/view_service.h"
 #include "interrupt_flags.h"
 
-#define LOOP_DEPLAY 250
-
 void setup()
 {
   Serial.begin(115200);
@@ -77,5 +75,5 @@ void loop()
     view::viewService.render();
   }
 
-  delay(LOOP_DEPLAY);
+  delay(250);
 }
