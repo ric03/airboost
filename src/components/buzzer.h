@@ -41,6 +41,20 @@ namespace buzzer
         toneOff();
     }
 
+    /**
+     * experimantal - Playing with Notes/Octaves
+     */
+    void playWelcomeMelody()
+    {
+        ledcWriteNote(BUZZER_CHANNEL, NOTE_C, 1);
+        delay(50);
+        ledcWriteNote(BUZZER_CHANNEL, NOTE_E, 2);
+        delay(50);
+        ledcWriteNote(BUZZER_CHANNEL, NOTE_G, 6);
+        delay(50);
+        toneOff();
+    }
+
     void playWarning()
     {
         if (isMuted)
