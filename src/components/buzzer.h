@@ -11,8 +11,12 @@ namespace buzzer
 
     void setup()
     {
+        Serial.print("Initializing buzzer ...");
+
         ledcSetup(BUZZER_CHANNEL, 500, 15);
         ledcAttachPin(BUZZER_PIN, BUZZER_CHANNEL);
+
+        Serial.println(" setup complete");
     }
 
     void play(int freq_Hz, int duration_ms)

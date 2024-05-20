@@ -35,6 +35,8 @@ namespace display
 
     void setup()
     {
+        Serial.print("Initializing display ...");
+
         if (!display.begin(I2C_ADDRESS, true))
         {
             Serial.println(F("SSD1306 allocation failed"));
@@ -48,6 +50,8 @@ namespace display
 
         display.clearDisplay();
         display.display();
+
+        Serial.println(" setup complete");
     }
 
     void printWelcomeMessage()

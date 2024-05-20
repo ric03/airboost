@@ -25,6 +25,8 @@ namespace button
         auto now = millis();
         if (now - last_button_time > DEBOUNCE_TIME)
         {
+            Serial.println("Button pressed: mute buzzer");
+
             last_button_time = now;
             buzzer::toggleMute();
             view::viewService.switchToBuzzerMuteView();
@@ -44,6 +46,8 @@ namespace button
         auto now = millis();
         if (now - last_button_time > DEBOUNCE_TIME)
         {
+            Serial.println("Button pressed: next view");
+
             last_button_time = now;
             view::viewService.switchToNextView();
             updateViewImmediatly = true;
@@ -61,7 +65,9 @@ namespace button
 
     void setup()
     {
+        Serial.print("Initializing buttons ...");
         setupButton(BUTTON_MUTE_BUZZER, isrMuteBuzzer);
         setupButton(BUTTON_NEXT_VIEW, isrNextView);
+        Serial.println(" setup complete");
     }
 }
