@@ -53,6 +53,7 @@ void loop()
     sensor_scd30::printSerial();
     traffic_light::printSerial();
 
+    updateViewImmediatly = false;
     view::viewService.render();
   }
 
@@ -65,6 +66,11 @@ void loop()
     buzzer::playWarning();
   }
 
+  /**
+   * The flag is updated by an ISR when a button is pressed.
+   * This will update the display immediatly, and is not bound to any other condition.
+   * Otherwise the view is updated only every ~2.5sec, which feels very laggy
+   */
   if (updateViewImmediatly)
   {
     updateViewImmediatly = false;
