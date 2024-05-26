@@ -23,6 +23,9 @@ Available Environments:
 
 ## Components
 
+![Breadboard](docs/airboost-breadboard.png)
+
+
 ### 1. The Microcontroller - Arduino Nano ESP32
 
 The microcontroller reads and processes the sensor values. Based on the values it controls  the display, buzzer and led.
@@ -92,6 +95,12 @@ To interact with the device two push buttons are installed.
 
 https://lastminuteengineers.com/handling-esp32-gpio-interrupts-tutorial/
 
+
+## Schematics created with KiCad
+
+https://github.com/ric03/airboost-kicad-schematics/
+
+![Schematics](docs/airboost-schematics.png)
 
 ## Code quality with SonarLint Plugin
 
