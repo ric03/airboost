@@ -93,19 +93,17 @@ To interact with the device two push buttons are installed.
 https://lastminuteengineers.com/handling-esp32-gpio-interrupts-tutorial/
 
 
-## SonarLint
+## Code quality with SonarLint Plugin
 
-Linter to detect & fix coding issues locally
+Linter to detect & fix coding issues locally.
 
 The plugin requires `compileCommands` in order to scan the code (`compile_commands.json`).
 
-Create the configuration with PlatformIO
-
-with a CLI command
+Create the configuration file either with a PIO cli command or through the PIO UI. (PlatformIO > Advanced > Compilation Database).
 
     platformio run --target compiledb --environment development
 
-or through the PIO-UI. (PlatformIO > Advanced > Compilation Database)
+https://docs.sonarsource.com/sonarlint/vs-code/getting-started/running-an-analysis/
 
 
 ## PIO Config for other Microcontrollers
