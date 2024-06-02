@@ -11,7 +11,7 @@ namespace button
     const int BUTTON_MUTE_BUZZER = D2;
     const int BUTTON_NEXT_VIEW = D3;
 
-    const unsigned long DEBOUNCE_TIME = 150; // ms
+    const unsigned long DEBOUNCE_TIME = 350; // ms
 
     void
 #if defined(ESP32)
